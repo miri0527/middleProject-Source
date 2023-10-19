@@ -1,0 +1,12 @@
+	  <sql id="MemberCondition">
+	  	<where>
+	  			
+	  			<if test="roleName != null">
+  	  				ROLENUM IN (SELECT ROLENUM FROM MEMBERROLE WHERE ROLENAME IN 
+  		  			<foreach collection="roleName" item="role" index="index" open="(" close=")" separator=",">
+  					  	#{role}			
+  		  			</foreach>
+		  			)
+	  			</if>
+	  	</where>
+	  </sql>
