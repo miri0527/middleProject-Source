@@ -1,0 +1,12 @@
+	/* 댓글 보기 */
+	
+	$.ajax({
+	    url: '/notice/replyList',
+	    type: 'GET',
+	    data : {
+	    	num : ${boardDTO.num}
+	    },
+	    success: function(response) {
+	        $("#replyList").html(response.trim());
+	    }
+	});
