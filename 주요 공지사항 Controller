@@ -1,0 +1,14 @@
+** Controller
+
+//Ajax로 NoticeDTO 타입의 important를 변수로 보내어 Controller에서 매개변수로 받음
+@GetMapping("importantList")
+	public ModelAndView getImportantList(NoticeDTO noticeDTO) throws Exception {
+		ModelAndView mv = new ModelAndView();
+		
+		List<NoticeDTO> ar = noticeService.getImportantList(noticeDTO);
+		
+		mv.addObject("importantList", ar);
+		mv.addObject("notice/importantList");
+		
+		return mv;
+	}
