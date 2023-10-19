@@ -1,0 +1,88 @@
+<table class="table table-hover text-center type10">
+	      <thead class="thead-dark">
+	      	
+	      	<tr>
+	      		<th style="width : 15%; ">옵션 이름</th>
+				<c:forEach items="${list}" var="productOptionDTO">
+					 <c:if test="${productOptionDTO.depth eq 2}">
+				        <th></th>
+				     </c:if>
+	      			 
+	      		</c:forEach> 
+					
+			</tr>
+	      </thead>
+	      <tbody>
+	      	<tr>	
+          //첫번째 옵션 조회
+	      		<td>${list2[0]}</td>
+		      		<c:forEach items="${list}" var="productOptionDTO">
+                  //첫번째 옵션의 값을 조회
+		      			  <c:if test="${productOptionDTO.depth eq 0}">
+					         <td colspan="4">${productOptionDTO.optionValue}</td>
+					     </c:if>
+					       
+		      		</c:forEach> 
+	
+	      		
+	      	</tr>
+	      		
+	      	<tr>
+
+          //두번째 옵션 조회
+	      		<td >${list2[1]}</td>
+	      		
+	      		<c:forEach items="${list}" var="productOptionDTO">
+                //두번째 옵션의 값을 조회
+	      		 <c:if test="${productOptionDTO.depth eq 1 }">
+				     	<td colspan="2">${productOptionDTO.optionValue}</td>
+				 	 
+				 </c:if>
+				 </c:forEach>
+				     
+	      	</tr>
+	      	
+	     	<tr>
+
+        //세번째 옵션 조회
+	     		<td>${list2[2]}</td>
+	     		<c:forEach items="${list}" var="productOptionDTO">
+            //마지막 옵션의 값을 조회
+	      		 <c:if test="${productOptionDTO.depth eq 2 }">
+	      	  
+				     	 <td>${productOptionDTO.optionValue}</td>
+				 	 
+				 </c:if>
+				 </c:forEach>
+	     		
+	     	</tr>
+	     	
+	     	<tr>
+	     		<td>재고</td>
+	     		
+	     		<c:forEach items="${list}" var="productOptionDTO">
+                // 마지막에 있는 가장 하위 옵션의 값의 재고 -> 가장 마지막 옵션이 해당 상품의 재고가 된다
+		      		 <c:if test="${productOptionDTO.depth eq 2 }">
+		      	
+				     	 <td>${productOptionDTO.productStock}</td>
+					 	 
+					 </c:if>
+				 </c:forEach>
+	     	</tr>
+	     	
+	     	<tr>
+	     		<td>가격</td>
+	     		
+	 	   		<c:forEach items="${list}" var="productOptionDTO">
+	      		 <c:if test="${productOptionDTO.depth eq 2 }">
+	      	     // 마지막에 있는 가장 하위 옵션의 값의 가격 -> 가장 마지막 옵션이 해당 상품의 가격이 된다
+				     	 <td>${productOptionDTO.productPrice}</td>
+				 	 
+				 </c:if>
+				 </c:forEach>
+	     	</tr>
+	      		
+			
+			
+	      </tbody>  
+     	 </table>
