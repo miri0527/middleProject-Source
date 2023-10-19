@@ -1,0 +1,32 @@
+** Service
+
+	@Override
+	public int setBoardAdd(BbsDTO bbsDTO, MultipartFile[] multipartFiles, HttpSession session) throws Exception {
+		
+		int result = noticeDAO.setBoardAdd(bbsDTO);
+
+    //저장할 경로 지정
+		String realPath = session.getServletContext().getRealPath("resources/upload/notice");
+
+    //등록할 파일이 없으면 그냥 저장
+		for(MultipartFile multipartFile : multipartFiles) {
+			if(multipartFile.isEmpty()) {
+				continue;
+			}
+
+    //파일 저장할 메서드 호출 
+		String fileName = fileManager.fileSave(multipartFile, realPath);
+      
+		// db에 insert 
+		BoardFileDTO boardFileDTO = new BoardFileDTO();
+		boardFileDTO.setNum(bbsDTO.getNum());
+		System.out.println("NUM:::" + boardFileDTO.getNum());
+		boardFileDTO.setFileName(fileName);
+		boardFileDTO.setOriName(multipartFile.getOriginalFilename());
+		
+		result = noticeDAO.setBoardFileAdd(boardFileDTO);
+		
+		}
+		
+		return result;
+	}
